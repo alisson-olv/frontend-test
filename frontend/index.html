@@ -9,7 +9,7 @@
   </head>
   <body>
     <div class="container mx-auto max-w-screen-lg px-5 mb-10">
-      <header class="flex py-5 items-center justify-between mb-10">
+      <header class="flex py-5 items-center justify-between mb-10 gap-3">
         <h1 class="text-3xl font-bold text-[#063940]">Tecsa Group Store</h1>
         <nav class="flex items-center gap-5">
           <button id="open-cart" class="cursor-pointer hover:underline">
@@ -19,7 +19,7 @@
       </header>
       <main class="flex flex-col gap-5">
         <h2 class="text-xl font-bold">Faça sua busca</h2>
-        <div class="grid grid-cols-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <p>Buscar por produtos:</p>
             <div
@@ -66,7 +66,10 @@
         <div id="loading-spinner" class="hidden">
           <div class="spinner"></div>
         </div>
-        <div id="product-list" class="grid grid-cols-3 gap-5"></div>
+        <div
+          id="product-list"
+          class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
       </main>
     </div>
 
