@@ -4,9 +4,10 @@ import { getAddressByCep } from '../services/cepService.js';
 
 const router = express.Router();
 
-router.get('/products', async (req, res) => {
+router.get('/products/:productName?', async (req, res) => {
   try {
-    const products = await getProducts();
+    const { productName } = req.params;
+    const products = await getProducts(productName);
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch products' });
