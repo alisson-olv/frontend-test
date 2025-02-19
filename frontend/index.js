@@ -25,12 +25,15 @@ function renderProducts(products) {
       <p class="font-bold">${product.name}</p>
       <p class="text-sm">${product.desc}</p>
       <p class="text-sm">${product.category}</p>
-      <p class="text-sm">Preço: <span>R$ ${product.pricing.price_usd}</span></p>
+      <p class="text-sm">R$ ${product.pricing.price_brl}</p>
       ${
-        product.pricing.discount
-          ? `<p class="text-sm">Desconto: <span>R$ ${product.pricing.discount}</span></p>`
+        product.pricing.discount_brl
+          ? `<p class="text-sm">Desconto: <span>R$ ${product.pricing.discount_brl}</span></p>`
           : ''
       }
+      <p class="text-sm">Preço com Desconto: R$ ${
+        product.pricing.final_price_brl
+      }</p>
       <p class="text-sm">Estado: <span>${product.state}</span></p>
     `;
 
@@ -73,6 +76,7 @@ async function loadProducts(productName = '', stateFilter = '') {
 
 async function handleCepSearchClick() {
   const searchCepInput = document.querySelector('#search-cep');
+  const searchInput = document.querySelector('#search-items');
   const cepValue = searchCepInput.value.trim();
 
   if (cepValue) {
@@ -80,6 +84,7 @@ async function handleCepSearchClick() {
       const state = await getStateFromZip(cepValue);
 
       if (state) {
+        searchInput.value = '';
         loadProducts('', state);
       } else {
         console.error('State not found');
@@ -92,14 +97,18 @@ async function handleCepSearchClick() {
 
 function handleSearchClick() {
   const searchInput = document.querySelector('#search-items');
+  const searchCepInput = document.querySelector('#search-cep');
   const productName = searchInput.value.trim();
-  loadProducts(productName);
+
+  if (productName) {
+    searchCepInput.value = '';
+    loadProducts(productName);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.querySelector('#search-button-items');
   const searchCepButton = document.querySelector('#search-button-cep');
-  const searchInput = document.querySelector('#search-items');
 
   loadProducts();
 
