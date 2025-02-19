@@ -1,0 +1,16 @@
+# Node.js dependencies
+/node_modules/
+
+# Environment files
+.env
+
+# Build output
+/dist
+/build
+
+# Npm package lock files (optional: for specific environments)
+package-lock.json
+yarn.lock
+
+# Docker
+.docker/
