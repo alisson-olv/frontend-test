@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  background-color: #e8e8e8;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+}
+
+input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
