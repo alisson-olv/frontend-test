@@ -28,12 +28,11 @@ function renderProducts(products) {
       <p class="text-sm">R$ ${product.pricing.price_brl}</p>
       ${
         product.pricing.discount_brl
-          ? `<p class="text-sm">Desconto: <span>R$ ${product.pricing.discount_brl}</span></p>`
+          ? `<p class="text-sm">Desconto: <span>R$ ${product.pricing.discount_brl}</span></p>
+          <p class="text-sm">Preço com Desconto: R$ ${product.pricing.final_price_brl}</p>`
           : ''
       }
-      <p class="text-sm">Preço com Desconto: R$ ${
-        product.pricing.final_price_brl
-      }</p>
+      
       <p class="text-sm">Estado: <span>${product.state}</span></p>
     `;
 

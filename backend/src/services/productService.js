@@ -42,6 +42,8 @@ export async function getProducts(productName = '') {
             item.pricing.final_price_brl = parseFloat(
               item.pricing.price_brl - item.pricing.discount_brl
             ).toFixed(2);
+          } else {
+            item.pricing.final_price_brl = item.pricing.price_brl;
           }
         }
 
