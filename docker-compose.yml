@@ -2,16 +2,14 @@ services:
   backend:
     build:
       context: ./backend
-    container_name: backend
+      dockerfile: Dockerfile
     ports:
-      - '3000:3000'
+      - '5000:5000'
+    env_file:
+      - ./backend/.env
     volumes:
       - ./backend:/app
-    command: npm run dev
-    environment:
-      - NODE_ENV=development
-    networks:
-      - app-network
+      - /app/node_modules
 
   frontend:
     build:
