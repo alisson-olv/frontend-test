@@ -140,20 +140,19 @@ async function loadProducts(productName = '', stateFilter = '') {
 
 async function handleCepSearchClick() {
   const searchCepInput = document.querySelector('#search-cep');
-  const searchInput = document.querySelector('#search-items');
   const cepValue = searchCepInput.value.trim();
 
   if (cepValue) {
     try {
-      const state = await getStateFromZip(cepValue);
-      if (state) {
-        searchInput.value = '';
-        loadProducts('', state);
+      const uf = await getStateFromZip(cepValue);
+
+      if (uf) {
+        loadProducts('', uf);
       } else {
-        console.error('State not found');
+        console.error('UF not found for the provided CEP.');
       }
     } catch (error) {
-      console.error('Error fetching state:', error);
+      console.error('Error fetching UF:', error);
     }
   }
 }
