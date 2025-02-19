@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
     <title>Frontend Test</title>
@@ -38,6 +37,7 @@
                 class="w-5 cursor-pointer"
                 src="./assets/search-icon.png"
                 alt="Buscar produtos"
+                id="search-button-items"
               />
             </div>
           </div>
@@ -57,23 +57,21 @@
                 class="w-5 cursor-pointer"
                 src="./assets/search-icon.png"
                 alt="Buscar pelo cep"
+                id="search-button-cep"
               />
             </div>
           </div>
         </div>
 
         <h2 class="text-xl font-bold mt-10">Lista de produtos:</h2>
-        <div class="grid grid-cols-3 gap-5">
-          <div class="flex flex-col gap-3 bg-white rounded-lg p-5">
-            <p class="font-bold">Nome do produto</p>
-            <p class="text-sm">Descrição do produto</p>
-            <p class="text-sm">Categoria</p>
-            <p class="text-sm">Preço: <span>R$ 100,00</span></p>
-            <p class="text-sm">Desconto: <span>R$ 100,00</span></p>
-          </div>
+        <div id="loading-spinner" class="hidden">
+          <div class="spinner"></div>
         </div>
+        <div id="product-list" class="grid grid-cols-3 gap-5"></div>
       </main>
       <!-- <footer>Aqui vai o footer</footer> -->
     </div>
+
+    <script type="module" src="./index.js"></script>
   </body>
 </html>
