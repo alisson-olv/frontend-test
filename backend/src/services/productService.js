@@ -1,3 +1,5 @@
+import { convertUsdToBrl } from './currencyService.js';
+
 export async function getProducts(productName = '') {
   const url = productName
     ? `https://alphalabs.webdiet.com.br/api/products?keyword=${productName}`
@@ -24,6 +26,25 @@ export async function getProducts(productName = '') {
 
     const productsWithState = await Promise.all(
       responseCep.items.map(async (item) => {
+        if (item.pricing) {
+          if (item.pricing.price_usd) {
+            item.pricing.price_brl = await convertUsdToBrl(
+              parseFloat(
+                item.pricing.price_usd.replace('$', '').replace(',', '')
+              )
+            );
+          }
+
+          if (item.pricing.discount) {
+            item.pricing.discount_brl = await convertUsdToBrl(
+              parseFloat(item.pricing.discount)
+            );
+            item.pricing.final_price_brl = parseFloat(
+              item.pricing.price_brl - item.pricing.discount_brl
+            ).toFixed(2);
+          }
+        }
+
         try {
           const cepResponse = await fetch(
             `https://viacep.com.br/ws/${item.cep}/json/`
@@ -32,13 +53,13 @@ export async function getProducts(productName = '') {
 
           if (cepData.erro) {
             console.error(`CEP ${item.cep} not found!`);
-            item.state = 'State not found';
+            item.state = 'Erro não encontrado';
           } else {
             item.state = cepData.uf;
           }
         } catch (error) {
           console.error(`Error fetching CEP ${item.cep}:`, error);
-          item.state = 'Error fetching state';
+          item.state = 'Erro ao buscar o estado';
         }
 
         return item;
