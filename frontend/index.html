@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-
     <title>Frontend Test</title>
   </head>
   <body>
@@ -13,7 +12,9 @@
       <header class="flex py-5 items-center justify-between mb-10">
         <h1 class="text-3xl font-bold text-[#063940]">Tecsa Group Store</h1>
         <nav class="flex items-center gap-5">
-          <a href="#">Carrinho</a>
+          <button id="open-cart" class="cursor-pointer hover:underline">
+            Abrir Carrinho
+          </button>
         </nav>
       </header>
       <main class="flex flex-col gap-5">
@@ -67,6 +68,26 @@
         </div>
         <div id="product-list" class="grid grid-cols-3 gap-5"></div>
       </main>
+    </div>
+
+    <!-- Modal do Carrinho -->
+    <div
+      id="cart-modal"
+      class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center"
+    >
+      <div class="bg-white p-5 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-xl font-bold mb-4">Seu Carrinho</h2>
+        <ul id="cart-items" class="space-y-2"></ul>
+        <p class="font-bold mt-4">
+          Total: R$ <span id="cart-total">0.00</span>
+        </p>
+        <button
+          id="close-cart"
+          class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg cursor-pointer"
+        >
+          Fechar
+        </button>
+      </div>
     </div>
 
     <script type="module" src="./index.js"></script>
